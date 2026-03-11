@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/quotes")
 public class QuoteController {
+  private QuoteService quoteService;
 
-  public QuoteController() {}
+  public QuoteController(QuoteService quoteService) {
+    this.quoteService = quoteService;
+  }
 
-  @GetMapping
-  public String gimmieAQuote() {
-    return "Here's your quote, bub!";
+  @GetMapping("/random")
+  public String retrieveQuote() {
+    return quoteService.getQuote();
   }
 }
