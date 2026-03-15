@@ -1,5 +1,6 @@
 package io.github.jsbro98.quotegenerator;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
@@ -21,17 +22,32 @@ public class QuoteControllerTest {
   @MockitoBean
   QuoteService quoteService;
 
-  @Test
-  public void itReturnsEndpointRandom() throws Exception {
-    RandomQuote[] testQuoteData = {
-            new RandomQuote("Be brave", "Myself", "html...")
+  @BeforeEach
+  void setUp() {
+    RandomQuote[] fakeQuote = new RandomQuote[]{
+            new RandomQuote("Test quote", "Test author", "<html>")
     };
 
-    when(quoteService.getRandomQuote()).thenReturn(testQuoteData);
+    when(quoteService.getRandomQuote()).thenReturn(fakeQuote);
+  }
 
+  @Test
+  public void itReturnsEndpointRandom() throws Exception {
     mockMvc.perform(get("/quotes/random")
                     .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+  }
+
+  @Test
+  public void shouldReturn200() throws Exception {
+    mockMvc.perform(get("/quotes/random"))
+            .andExpect(status().is(200));
+  }
+
+  @Test
+  public void shouldReturnJSON() throws Exception {
+    mockMvc.perform(get("/quotes/random"))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 }
