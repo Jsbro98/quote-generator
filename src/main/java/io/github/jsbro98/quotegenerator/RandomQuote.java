@@ -1,4 +1,9 @@
 package io.github.jsbro98.quotegenerator;
 
-public record RandomQuote(String author, String content, String html) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record RandomQuote(
+        @JsonProperty("q") String content,
+        @JsonProperty("a") String author,
+        @JsonProperty("h") String html) {
 }
