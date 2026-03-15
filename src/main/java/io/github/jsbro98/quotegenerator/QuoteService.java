@@ -6,14 +6,16 @@ import org.springframework.web.client.RestClient;
 
 @Service
 public class QuoteService {
-  private final RestClient restClient = RestClient.create();
-  private final String baseUrl = "https://zenquotes.io/api/random";
+  private final String baseUrl = "https://zenquotes.io/api";
+  private final RestClient restClient = RestClient.builder()
+          .baseUrl(baseUrl).build();
 
-  public String getQuote() {
+  public RandomQuote[] getRandomQuote() {
     return restClient.get()
-            .uri(baseUrl)
+            .uri("/random")
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
-            .body(String.class);
+            .body(RandomQuote[].class);
   }
+
 }
