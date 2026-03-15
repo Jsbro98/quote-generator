@@ -14,7 +14,7 @@ public class QuoteController {
   }
 
   @GetMapping("/random")
-  public String retrieveQuote() {
-    return quoteService.getQuote();
+  public RandomQuote[] retrieveQuote() {
+    return quoteService.getRandomQuote();
   }
 }
