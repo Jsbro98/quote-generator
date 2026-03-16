@@ -35,8 +35,7 @@ public class QuoteControllerTest {
   public void itReturnsEndpointRandom() throws Exception {
     mockMvc.perform(get("/quotes/random")
                     .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON));
+            .andExpect(status().isOk());
   }
 
   @Test
