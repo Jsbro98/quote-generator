@@ -17,4 +17,12 @@ public class ZenQuotesClientAPI {
             .retrieve()
             .body(RandomQuote[].class);
   }
+
+  public QuoteFromListRequest[] getQuoteBatch() {
+    return restClient.get()
+            .uri("/quotes")
+            .accept(MediaType.APPLICATION_JSON)
+            .retrieve()
+            .body(QuoteFromListRequest[].class);
+  }
 }
