@@ -26,4 +26,8 @@ public class QuoteRepository {
   public void resetQuotes() {
     quotes.clear();
   }
+
+  public List<QuoteFromListRequest> getSavedQuotes() {
+    return quotes;
+  }
 }
