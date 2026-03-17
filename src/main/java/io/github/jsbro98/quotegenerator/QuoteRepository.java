@@ -3,19 +3,27 @@ package io.github.jsbro98.quotegenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class QuoteRepository {
-  private final Map<Integer, RandomQuote> quotes;
+  private final List<QuoteFromListRequest> quotes;
 
   public QuoteRepository() {
-    quotes = new HashMap<>();
+    quotes = new ArrayList<>();
   }
 
   @Autowired
-  public QuoteRepository(HashMap<Integer, RandomQuote> quotes) {
+  public QuoteRepository(ArrayList<QuoteFromListRequest> quotes) {
     this.quotes = quotes;
+  }
+
+  public void saveQuotes(ArrayList<QuoteFromListRequest> quotes) {
+    this.quotes.addAll(quotes);
+  }
+
+  public void resetQuotes() {
+    quotes.clear();
   }
 }
