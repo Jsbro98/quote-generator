@@ -1,4 +1,10 @@
 package io.github.jsbro98.quotegenerator;
 
-public record QuoteFromListRequest(String quote, String author, int chars, String html) {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record QuoteFromListRequest(
+        @JsonProperty("q") String quote,
+        @JsonProperty("a") String author,
+        @JsonProperty("c") int chars,
+        @JsonProperty("h") String html) {
 }
