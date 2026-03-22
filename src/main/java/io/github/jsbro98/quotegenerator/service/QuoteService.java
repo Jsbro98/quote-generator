@@ -29,6 +29,9 @@ public class QuoteService {
   }
 
   // get a quote from saved batch in repo
+  // TODO: change this method to have savedQuotes here use a Deque
+  //  and iterate through the stack to retrieve them instead of using
+  //  a random call and removing to ensure no duplicate quotes
   public QuoteFromListRequest getRandomSavedQuote() {
     ArrayList<QuoteFromListRequest> savedQuotes = (ArrayList<QuoteFromListRequest>) quoteRepository.getSavedQuotes();
     int size = savedQuotes.size();
