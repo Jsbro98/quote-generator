@@ -1,5 +1,8 @@
-package io.github.jsbro98.quotegenerator;
+package io.github.jsbro98.quotegenerator.controller;
 
+import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
+import io.github.jsbro98.quotegenerator.service.QuoteService;
+import io.github.jsbro98.quotegenerator.RandomQuote;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

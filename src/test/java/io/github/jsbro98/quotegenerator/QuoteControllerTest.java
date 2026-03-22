@@ -1,5 +1,7 @@
 package io.github.jsbro98.quotegenerator;
 
+import io.github.jsbro98.quotegenerator.controller.QuoteController;
+import io.github.jsbro98.quotegenerator.service.QuoteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

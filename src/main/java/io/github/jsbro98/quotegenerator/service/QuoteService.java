@@ -1,5 +1,9 @@
-package io.github.jsbro98.quotegenerator;
+package io.github.jsbro98.quotegenerator.service;
 
+import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
+import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
+import io.github.jsbro98.quotegenerator.RandomQuote;
+import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

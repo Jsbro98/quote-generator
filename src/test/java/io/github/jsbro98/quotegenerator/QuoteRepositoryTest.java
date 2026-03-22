@@ -1,5 +1,6 @@
 package io.github.jsbro98.quotegenerator;
 
+import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,6 @@
-package io.github.jsbro98.quotegenerator;
+package io.github.jsbro98.quotegenerator.repository;
 
+import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
