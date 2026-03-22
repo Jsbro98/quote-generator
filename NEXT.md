@@ -9,9 +9,5 @@
 ## QuoteRepository
     - add new methods for removing, validating, and possibly refreshing
 
-## QuoteFromListRequest
-    - see if we can make it return an int instead of a chars with a string value
-
 ## Overall Project
-    - add packages for better organization
     - as stated in TODO, create DTO for decoupling purposes
