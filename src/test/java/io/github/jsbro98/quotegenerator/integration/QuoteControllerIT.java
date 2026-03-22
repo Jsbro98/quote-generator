@@ -35,8 +35,15 @@ public class QuoteControllerIT {
   }
 
   @Test
-  public void itReturnsEndpointRandom() throws Exception {
+  public void itReturnsARandomQuote_whenCallingRandomEndpoint() throws Exception {
     mockMvc.perform(get("/quotes/random")
+                    .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk());
+  }
+
+  @Test
+  public void itReturnsAQuote_whenCallingSingleQuoteEndpoint() throws Exception {
+    mockMvc.perform(get("/quotes/single-quote")
                     .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
   }
