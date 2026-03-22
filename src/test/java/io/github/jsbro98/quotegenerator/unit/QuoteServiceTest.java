@@ -1,5 +1,6 @@
-package io.github.jsbro98.quotegenerator;
+package io.github.jsbro98.quotegenerator.unit;
 
+import io.github.jsbro98.quotegenerator.RandomQuote;
 import io.github.jsbro98.quotegenerator.service.QuoteService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
