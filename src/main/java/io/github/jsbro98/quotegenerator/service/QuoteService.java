@@ -4,6 +4,7 @@ import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import io.github.jsbro98.quotegenerator.RandomQuote;
 import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -27,11 +28,16 @@ public class QuoteService {
 
   // get a quote from saved batch in repo
   public QuoteFromListRequest getRandomSavedQuote() {
-    ArrayList<QuoteFromListRequest> savedQuotes = (ArrayList<QuoteFromListRequest>) quoteRepository.getSavedQuotes();
-    int size = savedQuotes.size();
-    QuoteFromListRequest quote = savedQuotes.get(SERVICE_RANDOM.nextInt(size));
-    savedQuotes.remove(quote);
+    QuoteFromListRequest quote = quoteRepository.serveSavedQuote();
+    refetchIfNeeded();
     return quote;
+  }
+
+  @Async
+  private void refetchIfNeeded() {
+    if (quoteRepository.quotesAreGettingLow()) {
+      fetchNewQuotes(this.quoteRepository);
+    }
   }
 
   private void fetchNewQuotes(QuoteRepository quoteRepository) {
