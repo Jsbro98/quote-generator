@@ -1,26 +1,17 @@
 package io.github.jsbro98.quotegenerator.repository;
 
 import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 @Repository
 public class QuoteRepository {
-  private final List<QuoteFromListRequest> quotes;
+  private final Deque<QuoteFromListRequest> quotes =  new ArrayDeque<>();
+  private final int REFILL_THRESHOLD = 3;
 
-  public QuoteRepository() {
-    quotes = new ArrayList<>();
-  }
-
-  @Autowired
-  public QuoteRepository(ArrayList<QuoteFromListRequest> quotes) {
-    this.quotes = quotes;
-  }
-
-  public void saveQuotes(ArrayList<QuoteFromListRequest> quotes) {
+  public void saveQuotes(ArrayDeque<QuoteFromListRequest> quotes) {
     this.quotes.addAll(quotes);
   }
 
@@ -28,7 +19,7 @@ public class QuoteRepository {
     quotes.clear();
   }
 
-  public List<QuoteFromListRequest> getSavedQuotes() {
+  public Deque<QuoteFromListRequest> getSavedQuotes() {
     return quotes;
   }
 }
