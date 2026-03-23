@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
+import java.util.ArrayDeque;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,11 +18,11 @@ class QuoteRepositoryTest {
   @Autowired
   private QuoteRepository quoteRepository;
 
-  private static ArrayList<QuoteFromListRequest> quotes;
+  private static ArrayDeque<QuoteFromListRequest> quotes;
 
   @BeforeAll
   static void beforeAll() {
-    quotes = new ArrayList<>();
+    quotes = new ArrayDeque<>();
     quotes.add(new QuoteFromListRequest("Test 0", "Beep", "265", "<h1>HTML<h1/>"));
     quotes.add(new QuoteFromListRequest("Test 1", "Bloop", "265", "<h1>HTML<h1/>"));
     quotes.add(new QuoteFromListRequest("Test 2", "Blep", "265", "<h1>HTML<h1/>"));
