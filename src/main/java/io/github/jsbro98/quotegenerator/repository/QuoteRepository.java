@@ -22,4 +22,12 @@ public class QuoteRepository {
   public Deque<QuoteFromListRequest> getSavedQuotes() {
     return quotes;
   }
+
+  public QuoteFromListRequest serveSavedQuote() {
+    return quotes.poll();
+  }
+
+  public boolean quotesAreGettingLow() {
+    return quotes.size() < REFILL_THRESHOLD;
+  }
 }
