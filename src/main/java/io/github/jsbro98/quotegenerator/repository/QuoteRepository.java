@@ -30,4 +30,8 @@ public class QuoteRepository {
   public boolean quotesAreGettingLow() {
     return quotes.size() < REFILL_THRESHOLD;
   }
+
+  public int howManyQuotesLeft() {
+    return quotes.size();
+  }
 }

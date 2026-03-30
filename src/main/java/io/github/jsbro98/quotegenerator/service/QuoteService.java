@@ -41,7 +41,7 @@ public class QuoteService {
   @Async
   private void refetchIfNeeded() {
     if (quoteRepository.quotesAreGettingLow()) {
-      log.info("fetching more quotes. Repo size: {}",  quoteRepository.getSavedQuotes().size());
+      log.info("fetching more quotes. Repo size: {}",  quoteRepository.howManyQuotesLeft());
       fetchNewQuotes(this.quoteRepository);
     }
   }
