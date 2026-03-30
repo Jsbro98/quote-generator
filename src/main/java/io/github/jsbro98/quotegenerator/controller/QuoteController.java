@@ -1,8 +1,8 @@
 package io.github.jsbro98.quotegenerator.controller;
 
-import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
+import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
 import io.github.jsbro98.quotegenerator.service.QuoteService;
-import io.github.jsbro98.quotegenerator.RandomQuote;
+import io.github.jsbro98.quotegenerator.ZenQuoteRandomDTO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,12 +17,12 @@ public class QuoteController {
   }
 
   @GetMapping("/random")
-  public RandomQuote[] retrieveQuote() {
+  public ZenQuoteRandomDTO[] retrieveQuote() {
     return quoteService.getRandomQuote();
   }
 
   @GetMapping("/single-quote")
-  public QuoteFromListRequest retrieveSavedQuotes() {
+  public ZenQuoteDTO retrieveSavedQuotes() {
     return quoteService.getRandomSavedQuote();
   }
 }

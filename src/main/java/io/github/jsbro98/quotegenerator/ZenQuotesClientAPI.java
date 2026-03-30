@@ -10,19 +10,19 @@ public class ZenQuotesClientAPI {
   private final RestClient restClient = RestClient.builder()
           .baseUrl(baseUrl).build();
 
-  public RandomQuote[] randomQuote() {
+  public ZenQuoteRandomDTO[] randomQuote() {
     return restClient.get()
             .uri("/random")
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
-            .body(RandomQuote[].class);
+            .body(ZenQuoteRandomDTO[].class);
   }
 
-  public QuoteFromListRequest[] getQuoteBatch() {
+  public ZenQuoteDTO[] getQuoteBatch() {
     return restClient.get()
             .uri("/quotes")
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
-            .body(QuoteFromListRequest[].class);
+            .body(ZenQuoteDTO[].class);
   }
 }

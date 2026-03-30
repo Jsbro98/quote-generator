@@ -1,6 +1,6 @@
 package io.github.jsbro98.quotegenerator.repository;
 
-import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
+import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayDeque;
@@ -8,10 +8,10 @@ import java.util.Deque;
 
 @Repository
 public class QuoteRepository {
-  private final Deque<QuoteFromListRequest> quotes =  new ArrayDeque<>();
+  private final Deque<ZenQuoteDTO> quotes =  new ArrayDeque<>();
   private final int REFILL_THRESHOLD = 3;
 
-  public void saveQuotes(ArrayDeque<QuoteFromListRequest> quotes) {
+  public void saveQuotes(ArrayDeque<ZenQuoteDTO> quotes) {
     this.quotes.addAll(quotes);
   }
 
@@ -19,11 +19,11 @@ public class QuoteRepository {
     quotes.clear();
   }
 
-  public Deque<QuoteFromListRequest> getSavedQuotes() {
+  public Deque<ZenQuoteDTO> getSavedQuotes() {
     return quotes;
   }
 
-  public QuoteFromListRequest serveSavedQuote() {
+  public ZenQuoteDTO serveSavedQuote() {
     return quotes.poll();
   }
 

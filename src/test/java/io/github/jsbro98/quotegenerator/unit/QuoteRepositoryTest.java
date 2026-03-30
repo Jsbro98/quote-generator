@@ -1,6 +1,6 @@
 package io.github.jsbro98.quotegenerator.unit;
 
-import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
+import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,14 +18,14 @@ class QuoteRepositoryTest {
   @Autowired
   private QuoteRepository quoteRepository;
 
-  private static ArrayDeque<QuoteFromListRequest> quotes;
+  private static ArrayDeque<ZenQuoteDTO> quotes;
 
   @BeforeAll
   static void beforeAll() {
     quotes = new ArrayDeque<>();
-    quotes.add(new QuoteFromListRequest("Test 0", "Beep", "265", "<h1>HTML<h1/>"));
-    quotes.add(new QuoteFromListRequest("Test 1", "Bloop", "265", "<h1>HTML<h1/>"));
-    quotes.add(new QuoteFromListRequest("Test 2", "Blep", "265", "<h1>HTML<h1/>"));
+    quotes.add(new ZenQuoteDTO("Test 0", "Beep", "265", "<h1>HTML<h1/>"));
+    quotes.add(new ZenQuoteDTO("Test 1", "Bloop", "265", "<h1>HTML<h1/>"));
+    quotes.add(new ZenQuoteDTO("Test 2", "Blep", "265", "<h1>HTML<h1/>"));
   }
 
   @BeforeEach

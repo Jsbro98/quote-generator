@@ -1,7 +1,7 @@
 package io.github.jsbro98.quotegenerator.unit;
 
-import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
-import io.github.jsbro98.quotegenerator.RandomQuote;
+import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
+import io.github.jsbro98.quotegenerator.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import io.github.jsbro98.quotegenerator.service.QuoteService;
@@ -28,14 +28,14 @@ public class QuoteServiceTest {
 
   @BeforeEach
   public void setup() {
-    doReturn(new QuoteFromListRequest[]{}).when(clientAPI).getQuoteBatch();
-    doReturn(new RandomQuote[]{}).when(clientAPI).randomQuote();
+    doReturn(new ZenQuoteDTO[]{}).when(clientAPI).getQuoteBatch();
+    doReturn(new ZenQuoteRandomDTO[]{}).when(clientAPI).randomQuote();
     quoteService = new QuoteService(clientAPI, repository);
   }
 
   @Test
   public void shouldGetRandomQuote() {
-    RandomQuote[] quote = quoteService.getRandomQuote();
+    ZenQuoteRandomDTO[] quote = quoteService.getRandomQuote();
     assertNotNull(quote);
     verify(clientAPI).randomQuote();
   }

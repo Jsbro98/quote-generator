@@ -1,7 +1,7 @@
 package io.github.jsbro98.quotegenerator.service;
 
-import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
-import io.github.jsbro98.quotegenerator.RandomQuote;
+import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
+import io.github.jsbro98.quotegenerator.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import org.slf4j.Logger;
@@ -25,14 +25,14 @@ public class QuoteService {
   }
 
   // external api call
-  public RandomQuote[] getRandomQuote() {
+  public ZenQuoteRandomDTO[] getRandomQuote() {
     // TODO: maybe create a DTO for this?
     return clientAPI.randomQuote();
   }
 
   // get a quote from saved batch in repo
-  public QuoteFromListRequest getRandomSavedQuote() {
-    QuoteFromListRequest quote = quoteRepository.serveSavedQuote();
+  public ZenQuoteDTO getRandomSavedQuote() {
+    ZenQuoteDTO quote = quoteRepository.serveSavedQuote();
     log.debug("getting saved quote {}", quote);
     refetchIfNeeded();
     return quote;
@@ -47,7 +47,7 @@ public class QuoteService {
   }
 
   private void fetchNewQuotes(QuoteRepository quoteRepository) {
-    ArrayDeque<QuoteFromListRequest> newData = new ArrayDeque<>(
+    ArrayDeque<ZenQuoteDTO> newData = new ArrayDeque<>(
             Arrays.asList(clientAPI.getQuoteBatch()));
     quoteRepository.saveQuotes(newData);
   }

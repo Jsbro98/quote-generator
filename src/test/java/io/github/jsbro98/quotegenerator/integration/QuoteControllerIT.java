@@ -1,6 +1,6 @@
 package io.github.jsbro98.quotegenerator.integration;
 
-import io.github.jsbro98.quotegenerator.RandomQuote;
+import io.github.jsbro98.quotegenerator.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.controller.QuoteController;
 import io.github.jsbro98.quotegenerator.service.QuoteService;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,8 +27,8 @@ public class QuoteControllerIT {
 
   @BeforeEach
   void setUp() {
-    RandomQuote[] fakeQuote = new RandomQuote[]{
-            new RandomQuote("Test quote", "Test author", "<html>")
+    ZenQuoteRandomDTO[] fakeQuote = new ZenQuoteRandomDTO[]{
+            new ZenQuoteRandomDTO("Test quote", "Test author", "<html>")
     };
 
     when(quoteService.getRandomQuote()).thenReturn(fakeQuote);
