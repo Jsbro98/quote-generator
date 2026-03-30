@@ -1,18 +1,22 @@
 package io.github.jsbro98.quotegenerator.service;
 
 import io.github.jsbro98.quotegenerator.QuoteFromListRequest;
-import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import io.github.jsbro98.quotegenerator.RandomQuote;
 import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
+import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Arrays;
 
 @Service
 public class QuoteService {
   private final ZenQuotesClientAPI clientAPI;
   private final QuoteRepository quoteRepository;
+  private static final Logger log = LoggerFactory.getLogger(QuoteService.class);
 
   public QuoteService(ZenQuotesClientAPI clientAPI, QuoteRepository quoteRepository) {
     this.clientAPI = clientAPI;
@@ -29,6 +33,7 @@ public class QuoteService {
   // get a quote from saved batch in repo
   public QuoteFromListRequest getRandomSavedQuote() {
     QuoteFromListRequest quote = quoteRepository.serveSavedQuote();
+    log.debug("getting saved quote {}", quote);
     refetchIfNeeded();
     return quote;
   }
@@ -36,6 +41,7 @@ public class QuoteService {
   @Async
   private void refetchIfNeeded() {
     if (quoteRepository.quotesAreGettingLow()) {
+      log.info("fetching more quotes. Repo size: {}",  quoteRepository.getSavedQuotes().size());
       fetchNewQuotes(this.quoteRepository);
     }
   }
