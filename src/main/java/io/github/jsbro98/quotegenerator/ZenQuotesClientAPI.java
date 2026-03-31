@@ -10,8 +10,8 @@ public class ZenQuotesClientAPI {
   private final RestClient restClient = RestClient.builder()
           .baseUrl(baseUrl).build();
 
-  public ZenQuoteRandomDTO[] randomQuote() {
-    return restClient.get()
+  public ZenQuoteRandomDTO randomQuote() {
+    ZenQuoteRandomDTO[] response = restClient.get()
             .uri("/random")
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()

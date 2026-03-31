@@ -25,8 +25,7 @@ public class QuoteService {
   }
 
   // external api call
-  public ZenQuoteRandomDTO[] getRandomQuote() {
-    // TODO: maybe create a DTO for this?
+  public ZenQuoteRandomDTO getRandomQuote() {
     return clientAPI.randomQuote();
   }
 

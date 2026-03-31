@@ -12,8 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class QuoteServiceTest {
@@ -29,13 +28,13 @@ public class QuoteServiceTest {
   @BeforeEach
   public void setup() {
     doReturn(new ZenQuoteDTO[]{}).when(clientAPI).getQuoteBatch();
-    doReturn(new ZenQuoteRandomDTO[]{}).when(clientAPI).randomQuote();
+    doReturn(mock(ZenQuoteRandomDTO.class)).when(clientAPI).randomQuote();
     quoteService = new QuoteService(clientAPI, repository);
   }
 
   @Test
   public void shouldGetRandomQuote() {
-    ZenQuoteRandomDTO[] quote = quoteService.getRandomQuote();
+    ZenQuoteRandomDTO quote = quoteService.getRandomQuote();
     assertNotNull(quote);
     verify(clientAPI).randomQuote();
   }

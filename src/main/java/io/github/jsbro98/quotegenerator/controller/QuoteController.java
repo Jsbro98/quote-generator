@@ -17,7 +17,7 @@ public class QuoteController {
   }
 
   @GetMapping("/random")
-  public ZenQuoteRandomDTO[] retrieveQuote() {
+  public ZenQuoteRandomDTO retrieveQuote() {
     return quoteService.getRandomQuote();
   }
 

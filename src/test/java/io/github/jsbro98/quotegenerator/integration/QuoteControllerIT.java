@@ -11,7 +11,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -27,11 +28,7 @@ public class QuoteControllerIT {
 
   @BeforeEach
   void setUp() {
-    ZenQuoteRandomDTO[] fakeQuote = new ZenQuoteRandomDTO[]{
-            new ZenQuoteRandomDTO("Test quote", "Test author", "<html>")
-    };
-
-    when(quoteService.getRandomQuote()).thenReturn(fakeQuote);
+    doReturn(mock(ZenQuoteRandomDTO.class)).when(quoteService).getRandomQuote();
   }
 
   @Test
