@@ -14,9 +14,10 @@ import java.util.Arrays;
 
 @Service
 public class QuoteService {
+  private static final Logger log = LoggerFactory.getLogger(QuoteService.class);
+
   private final ZenQuotesClientAPI clientAPI;
   private final QuoteRepository quoteRepository;
-  private static final Logger log = LoggerFactory.getLogger(QuoteService.class);
 
   public QuoteService(ZenQuotesClientAPI clientAPI, QuoteRepository quoteRepository) {
     this.clientAPI = clientAPI;
@@ -41,7 +42,7 @@ public class QuoteService {
   @Async
   private void refetchIfNeeded() {
     if (quoteRepository.quotesAreGettingLow()) {
-      log.info("fetching more quotes. Repo size: {}",  quoteRepository.howManyQuotesLeft());
+      log.info("fetching more quotes. Repo size: {}", quoteRepository.howManyQuotesLeft());
       fetchNewQuotes(this.quoteRepository);
     }
   }
