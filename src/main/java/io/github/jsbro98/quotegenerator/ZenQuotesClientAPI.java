@@ -12,6 +12,7 @@ public class ZenQuotesClientAPI {
   private final RestClient restClient = RestClient.builder()
           .baseUrl(baseUrl).build();
 
+  // ZenQuotes /random API returns an array of JSON with 1 item
   public ZenQuoteRandomDTO randomQuote() {
     ZenQuoteRandomDTO[] response = restClient.get()
             .uri("/random")
@@ -20,11 +21,11 @@ public class ZenQuotesClientAPI {
             .body(ZenQuoteRandomDTO[].class);
 
     Objects.requireNonNull(response, "response must not be null");
-    // ZenQuotes /random API returns an array of JSON with 1 item
-    // so lets return the 1 element in the array
+    // return the 1 element in the array
     return response[0];
   }
 
+  // this external API call returns a batch of ~50 random quotes
   public ZenQuoteDTO[] getQuoteBatch() {
     return restClient.get()
             .uri("/quotes")
