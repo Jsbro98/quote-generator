@@ -26,6 +26,7 @@ public class QuoteService {
 
   // external api call
   public ZenQuoteRandomDTO getRandomQuote() {
+    log.info("Fetching random quote directly from API");
     return clientAPI.randomQuote();
   }
 
