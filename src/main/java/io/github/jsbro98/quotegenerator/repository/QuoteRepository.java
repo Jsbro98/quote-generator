@@ -1,6 +1,6 @@
 package io.github.jsbro98.quotegenerator.repository;
 
-import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
+import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;

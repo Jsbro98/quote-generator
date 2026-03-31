@@ -1,6 +1,6 @@
 package io.github.jsbro98.quotegenerator.integration;
 
-import io.github.jsbro98.quotegenerator.ZenQuoteRandomDTO;
+import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.controller.QuoteController;
 import io.github.jsbro98.quotegenerator.service.QuoteService;
 import org.junit.jupiter.api.BeforeEach;

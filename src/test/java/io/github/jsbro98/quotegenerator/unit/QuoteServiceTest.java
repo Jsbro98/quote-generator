@@ -1,7 +1,7 @@
 package io.github.jsbro98.quotegenerator.unit;
 
-import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
-import io.github.jsbro98.quotegenerator.ZenQuoteRandomDTO;
+import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteDTO;
+import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import io.github.jsbro98.quotegenerator.service.QuoteService;

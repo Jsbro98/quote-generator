@@ -1,4 +1,4 @@
-package io.github.jsbro98.quotegenerator;
+package io.github.jsbro98.quotegenerator.dtorecords;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

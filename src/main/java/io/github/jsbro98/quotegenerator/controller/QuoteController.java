@@ -1,7 +1,7 @@
 package io.github.jsbro98.quotegenerator.controller;
 
-import io.github.jsbro98.quotegenerator.ZenQuoteDTO;
-import io.github.jsbro98.quotegenerator.ZenQuoteRandomDTO;
+import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteDTO;
+import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.service.QuoteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
