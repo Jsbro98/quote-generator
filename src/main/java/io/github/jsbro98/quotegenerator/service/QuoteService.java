@@ -7,6 +7,8 @@ import io.github.jsbro98.quotegenerator.errorhandling.customerrors.ZenQuoteBatch
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +25,14 @@ public class QuoteService {
   public QuoteService(ZenQuotesClientAPI clientAPI, QuoteRepository quoteRepository) {
     this.clientAPI = clientAPI;
     this.quoteRepository = quoteRepository;
-    fetchNewQuotes(this.quoteRepository);
+  }
+
+  // created to remove initialization out of the constructor
+  @EventListener(ApplicationReadyEvent.class)
+  @Async
+  public void initialize() {
+    log.info("Application ready. Performing initial quote fetch.");
+    fetchNewQuotes();
   }
 
   // external api call
@@ -44,11 +53,11 @@ public class QuoteService {
   private void refetchIfNeeded() {
     if (quoteRepository.quotesAreGettingLow()) {
       log.info("fetching more quotes. Repo size: {}", quoteRepository.howManyQuotesLeft());
-      fetchNewQuotes(this.quoteRepository);
+      fetchNewQuotes();
     }
   }
 
-  private void fetchNewQuotes(QuoteRepository quoteRepository) {
+  private void fetchNewQuotes() {
     ArrayDeque<ZenQuoteDTO> newData = new ArrayDeque<>(
             Arrays.asList(clientAPI.getQuoteBatch()));
 
