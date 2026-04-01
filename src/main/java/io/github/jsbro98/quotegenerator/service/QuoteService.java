@@ -1,8 +1,9 @@
 package io.github.jsbro98.quotegenerator.service;
 
+import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteDTO;
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
-import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
+import io.github.jsbro98.quotegenerator.errorhandling.customerrors.ZenQuoteBatchFailure;
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,6 +51,12 @@ public class QuoteService {
   private void fetchNewQuotes(QuoteRepository quoteRepository) {
     ArrayDeque<ZenQuoteDTO> newData = new ArrayDeque<>(
             Arrays.asList(clientAPI.getQuoteBatch()));
+
+    if (newData.isEmpty()) {
+      log.error("Fetching new batch of quotes has failed");
+      throw new ZenQuoteBatchFailure("Batch quote retrieval failed");
+    }
+
     quoteRepository.saveQuotes(newData);
   }
 }
