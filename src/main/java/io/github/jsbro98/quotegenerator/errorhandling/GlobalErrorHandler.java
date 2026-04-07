@@ -12,14 +12,16 @@ public class GlobalErrorHandler {
 
   @ExceptionHandler(ZenQuoteBatchFailure.class)
   public ResponseEntity<ApiErrorResponse> handleBatchFailure(ZenQuoteBatchFailure ex) {
-    ApiErrorResponse error = new ApiErrorResponse(400, ex.getMessage(), System.currentTimeMillis());
-    return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    HttpStatus status = HttpStatus.BAD_REQUEST;
+    ApiErrorResponse error = new ApiErrorResponse(status.value(), ex.getMessage(), System.currentTimeMillis());
+    return new ResponseEntity<>(error, status);
   }
 
   // A fallback for any unexpected errors that don't get specifically caught
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiErrorResponse> handleGenericException(Exception ex) {
-    ApiErrorResponse error = new ApiErrorResponse(500, ex.getMessage(), System.currentTimeMillis());
-    return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+    HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+    ApiErrorResponse error = new ApiErrorResponse(status.value(), ex.getMessage(), System.currentTimeMillis());
+    return new ResponseEntity<>(error, status);
   }
 }
