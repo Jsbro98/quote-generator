@@ -19,7 +19,7 @@ public class GlobalErrorHandlerTest {
     ResponseEntity<ApiErrorResponse> response = globalErrorHandler.handleBatchFailure(exception);
 
     assertNotNull(response.getBody());
-    assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+    assertEquals(HttpStatus.BAD_GATEWAY, response.getStatusCode());
     assertEquals("Bad Batch!", response.getBody().message());
   }
 

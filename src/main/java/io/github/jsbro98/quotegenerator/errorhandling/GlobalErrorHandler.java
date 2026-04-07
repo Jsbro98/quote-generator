@@ -12,7 +12,7 @@ public class GlobalErrorHandler {
 
   @ExceptionHandler(ZenQuoteBatchFailure.class)
   public ResponseEntity<ApiErrorResponse> handleBatchFailure(ZenQuoteBatchFailure ex) {
-    HttpStatus status = HttpStatus.BAD_REQUEST;
+    HttpStatus status = HttpStatus.BAD_GATEWAY;
     ApiErrorResponse error = new ApiErrorResponse(status.value(), ex.getMessage(), System.currentTimeMillis());
     return new ResponseEntity<>(error, status);
   }
