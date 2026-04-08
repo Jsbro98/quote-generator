@@ -49,7 +49,7 @@ public class QuoteService {
     return quote;
   }
 
-  // TODO: tested async and is actually not async... causes blocking
+  // TODO: refactor refetch and fetch into another class to make async work
   @Async
   private void refetchIfNeeded() {
     if (quoteRepository.quotesAreGettingLow()) {
