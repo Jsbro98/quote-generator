@@ -2,11 +2,10 @@ package io.github.jsbro98.quotegenerator;
 
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteDTO;
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
+import io.github.jsbro98.quotegenerator.errorhandling.customerrors.ZenQuoteAPIFailure;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
-
-import java.util.Objects;
 
 @Component
 public class ZenQuotesClientAPI {
@@ -22,17 +21,25 @@ public class ZenQuotesClientAPI {
             .retrieve()
             .body(ZenQuoteRandomDTO[].class);
 
-    Objects.requireNonNull(response, "response must not be null");
-    // return the 1 element in the array
+    if (response == null || response.length == 0) {
+      throw new ZenQuoteAPIFailure("ZenQuotes failed to return a random quote");
+    }
+
     return response[0];
   }
 
   // this external API call returns a batch of ~50 random quotes
   public ZenQuoteDTO[] getQuoteBatch() {
-    return restClient.get()
+    ZenQuoteDTO[] batchQuoteResponse = restClient.get()
             .uri("/quotes")
             .accept(MediaType.APPLICATION_JSON)
             .retrieve()
             .body(ZenQuoteDTO[].class);
+
+    if (batchQuoteResponse == null || batchQuoteResponse.length == 0) {
+      throw new ZenQuoteAPIFailure("ZenQuotes failed to return quote batch");
+    }
+
+    return batchQuoteResponse;
   }
 }
