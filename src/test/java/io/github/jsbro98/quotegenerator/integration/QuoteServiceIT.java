@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.concurrent.TimeUnit;
+
+import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -24,6 +27,10 @@ public class QuoteServiceIT {
   // TODO: refactor this into nested or multiple tests
   @Test
   public void shouldGet_QuotesFromBatch() {
+    await()
+            .atMost(5, TimeUnit.SECONDS)
+            .untilAsserted(() -> assertNotNull(quoteService.getRandomSavedQuote()));
+
     ZenQuoteDTO quoteOne = quoteService.getRandomSavedQuote();
     ZenQuoteDTO quoteTwo = quoteService.getRandomSavedQuote();
     ZenQuoteDTO quoteThree = quoteService.getRandomSavedQuote();
