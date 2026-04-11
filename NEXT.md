@@ -1,5 +1,9 @@
 # What to work on next
 
-## Overall Project
-    - make async work (extract to new class)
-        - read docs and implement AsyncConfigurer possibly
+### Overall Project
+1. add tests for RefresherService
+2. add front end
+   1. create html/js/css files
+
+### Possibly
+- integrate a database
