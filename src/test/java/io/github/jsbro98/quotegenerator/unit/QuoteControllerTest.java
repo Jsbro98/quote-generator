@@ -1,7 +1,7 @@
-package io.github.jsbro98.quotegenerator.integration;
+package io.github.jsbro98.quotegenerator.unit;
 
-import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.controller.QuoteController;
+import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.service.QuoteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(QuoteController.class)
-public class QuoteControllerIT {
+public class QuoteControllerTest {
   @Autowired
   MockMvc mockMvc;
 
