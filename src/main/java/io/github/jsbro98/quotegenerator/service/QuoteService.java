@@ -3,7 +3,6 @@ package io.github.jsbro98.quotegenerator.service;
 import io.github.jsbro98.quotegenerator.ZenQuotesClientAPI;
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteDTO;
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
-import io.github.jsbro98.quotegenerator.errorhandling.customerrors.ZenQuoteBatchFailure;
 import io.github.jsbro98.quotegenerator.repository.QuoteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,19 +11,18 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayDeque;
-import java.util.Arrays;
-
 @Service
 public class QuoteService {
   private static final Logger log = LoggerFactory.getLogger(QuoteService.class);
 
-  private final ZenQuotesClientAPI clientAPI;
   private final QuoteRepository quoteRepository;
+  private final RefreshService refreshService;
+  private final ZenQuotesClientAPI clientAPI;
 
-  public QuoteService(ZenQuotesClientAPI clientAPI, QuoteRepository quoteRepository) {
-    this.clientAPI = clientAPI;
+  public QuoteService(ZenQuotesClientAPI clientAPI, QuoteRepository quoteRepository, RefreshService refreshService) {
     this.quoteRepository = quoteRepository;
+    this.refreshService = refreshService;
+    this.clientAPI = clientAPI;
   }
 
   // created to remove initialization out of the constructor
@@ -32,7 +30,7 @@ public class QuoteService {
   @Async
   public void initialize() {
     log.info("Application ready. Performing initial quote fetch.");
-    fetchNewQuotes();
+    refreshService.refreshQuotes();
   }
 
   // external api call
@@ -49,24 +47,11 @@ public class QuoteService {
     return quote;
   }
 
-  // TODO: refactor refetch and fetch into another class to make async work
-  @Async
   private void refetchIfNeeded() {
     if (quoteRepository.quotesAreGettingLow()) {
       log.info("fetching more quotes. Repo size: {}", quoteRepository.howManyQuotesLeft());
-      fetchNewQuotes();
+      refreshService.refreshQuotes();
     }
   }
 
-  private void fetchNewQuotes() {
-    ArrayDeque<ZenQuoteDTO> newData = new ArrayDeque<>(
-            Arrays.asList(clientAPI.getQuoteBatch()));
-
-    if (newData.isEmpty()) {
-      log.error("Fetching new batch of quotes has failed");
-      throw new ZenQuoteBatchFailure("Batch quote retrieval failed");
-    }
-
-    quoteRepository.saveQuotes(newData);
-  }
 }
