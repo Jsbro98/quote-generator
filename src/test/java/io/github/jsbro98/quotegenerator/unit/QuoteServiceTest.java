@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class QuoteServiceTest {
+class QuoteServiceTest {
 
   @Mock
   ZenQuotesClientAPI clientAPI;
@@ -29,12 +29,12 @@ public class QuoteServiceTest {
   private QuoteService quoteService;
 
   @BeforeEach
-  public void setup() {
+  void setup() {
     quoteService = new QuoteService(clientAPI, repository, refreshService);
   }
 
   @Test
-  public void shouldGetRandomQuote() {
+  void shouldGetRandomQuote() {
     ZenQuoteRandomDTO mockQuote = mock(ZenQuoteRandomDTO.class);
     doReturn(mockQuote).when(clientAPI).randomQuote();
 

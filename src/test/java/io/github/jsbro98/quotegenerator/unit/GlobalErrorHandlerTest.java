@@ -10,11 +10,11 @@ import org.springframework.http.ResponseEntity;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class GlobalErrorHandlerTest {
+class GlobalErrorHandlerTest {
   private final GlobalErrorHandler globalErrorHandler = new GlobalErrorHandler();
 
   @Test
-  void shouldHandleBatchException() throws Exception {
+  void shouldHandleBatchException() {
     ZenQuoteBatchFailure exception = new ZenQuoteBatchFailure("Bad Batch!");
     ResponseEntity<ApiErrorResponse> response = globalErrorHandler.handleBatchFailure(exception);
 
@@ -24,7 +24,7 @@ public class GlobalErrorHandlerTest {
   }
 
   @Test
-  void shouldHandleGeneralException() throws Exception {
+  void shouldHandleGeneralException() {
     Exception exception = new Exception("Bad Exception!");
     ResponseEntity<ApiErrorResponse> response = globalErrorHandler.handleGenericException(exception);
 

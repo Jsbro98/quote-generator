@@ -13,9 +13,9 @@ public class QuoteRepository {
   private static final Logger log = LoggerFactory.getLogger(QuoteRepository.class);
 
   private final Deque<ZenQuoteDTO> quotes = new ArrayDeque<>();
-  private final int REFILL_THRESHOLD = 3;
+  private static final int REFILL_THRESHOLD = 3;
 
-  public void saveQuotes(ArrayDeque<ZenQuoteDTO> quotes) {
+  public void saveQuotes(Deque<ZenQuoteDTO> quotes) {
     log.debug("saving {} quotes to repo", quotes.size());
     this.quotes.addAll(quotes);
   }

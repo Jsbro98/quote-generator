@@ -19,7 +19,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 
 @WebMvcTest(QuoteController.class)
-public class QuoteControllerTest {
+class QuoteControllerTest {
   @Autowired
   MockMvc mockMvc;
 
@@ -32,27 +32,27 @@ public class QuoteControllerTest {
   }
 
   @Test
-  public void itReturnsARandomQuote_whenCallingRandomEndpoint() throws Exception {
+  void itReturnsARandomQuote_whenCallingRandomEndpoint() throws Exception {
     mockMvc.perform(get("/quotes/random")
                     .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
   }
 
   @Test
-  public void itReturnsAQuote_whenCallingSingleQuoteEndpoint() throws Exception {
+  void itReturnsAQuote_whenCallingSingleQuoteEndpoint() throws Exception {
     mockMvc.perform(get("/quotes/single-quote")
                     .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
   }
 
   @Test
-  public void shouldReturn200() throws Exception {
+  void shouldReturn200() throws Exception {
     mockMvc.perform(get("/quotes/random"))
             .andExpect(status().is(200));
   }
 
   @Test
-  public void shouldReturnJSON() throws Exception {
+  void shouldReturnJSON() throws Exception {
     mockMvc.perform(get("/quotes/random"))
             .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }

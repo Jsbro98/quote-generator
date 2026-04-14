@@ -13,20 +13,20 @@ import static org.awaitility.Awaitility.await;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-public class QuoteServiceIT {
+class QuoteServiceIT {
 
   @Autowired
   private QuoteService quoteService;
 
   @Test
-  public void shouldGetRandomQuote() {
+  void shouldGetRandomQuote() {
     ZenQuoteRandomDTO quote = quoteService.getRandomQuote();
     assertNotNull(quote, "quote must be present");
   }
 
   // TODO: refactor this into nested or multiple tests
   @Test
-  public void shouldGet_QuotesFromBatch() {
+  void shouldGet_QuotesFromBatch() {
     await()
             .atMost(5, TimeUnit.SECONDS)
             .untilAsserted(() -> assertNotNull(quoteService.getRandomSavedQuote()));
