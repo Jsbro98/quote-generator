@@ -3,15 +3,21 @@ package io.github.jsbro98.quotegenerator;
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteDTO;
 import io.github.jsbro98.quotegenerator.dtorecords.ZenQuoteRandomDTO;
 import io.github.jsbro98.quotegenerator.errorhandling.customerrors.ZenQuoteAPIFailure;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 @Component
 public class ZenQuotesClientAPI {
-  private final String baseUrl = "https://zenquotes.io/api";
-  private final RestClient restClient = RestClient.builder()
-          .baseUrl(baseUrl).build();
+  private final RestClient restClient;
+
+  // @Value is used here to allow url injection for testing/stubbing
+  public ZenQuotesClientAPI(@Value("${zenquotes.base-url:https://zenquotes.io/api}") String baseURL) {
+    this.restClient = RestClient.builder()
+            .baseUrl(baseURL)
+            .build();
+  }
 
   // ZenQuotes /random API returns an array of JSON with 1 item
   public ZenQuoteRandomDTO randomQuote() {
