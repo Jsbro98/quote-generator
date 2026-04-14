@@ -32,28 +32,17 @@ class QuoteControllerTest {
   }
 
   @Test
-  void itReturnsARandomQuote_whenCallingRandomEndpoint() throws Exception {
+  void shouldReturnOkAndJson_whenCallingRandomEndpoint() throws Exception {
     mockMvc.perform(get("/quotes/random")
                     .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk());
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 
   @Test
-  void itReturnsAQuote_whenCallingSingleQuoteEndpoint() throws Exception {
+  void shouldReturnOk_whenCallingSingleQuoteEndpoint() throws Exception {
     mockMvc.perform(get("/quotes/single-quote")
                     .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk());
-  }
-
-  @Test
-  void shouldReturn200() throws Exception {
-    mockMvc.perform(get("/quotes/random"))
-            .andExpect(status().is(200));
-  }
-
-  @Test
-  void shouldReturnJSON() throws Exception {
-    mockMvc.perform(get("/quotes/random"))
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON));
   }
 }
