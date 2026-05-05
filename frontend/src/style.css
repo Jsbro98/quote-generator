@@ -13,6 +13,7 @@ body {
     border-radius: 10px;
     border: black solid 1px;
     padding: 0 2em 2em 2em;
+    margin: 1em 6em;
 }
 
 #app {
@@ -22,6 +23,23 @@ body {
     justify-content: center;
 
     margin-top: 2em;
+}
+
+.quote-box {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+
+    transition: opacity 0.75s ease-in-out,
+    max-height 0.75s ease-in-out;
+}
+
+.quote-box.show {
+    opacity: 1;
+}
+
+.quote-box.adjust-height {
+    max-height: 300px;
 }
 
 .subtitle {
@@ -37,4 +55,9 @@ body {
 .title-header {
     align-self: center;
     justify-self: start;
+}
+
+.request-quote-button {
+    margin-top: 1em;
+    font-style: italic;
 }
