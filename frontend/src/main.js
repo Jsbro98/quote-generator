@@ -1,11 +1,25 @@
 const quoteHolder = document.querySelector('.quote-box');
 const requestButton = document.querySelector('.request-quote-button');
 
+let isAnimating = false;
 requestButton.addEventListener('click', (e) => {
+    if (isAnimating) return;
+
+    isAnimating = true;
     getSavedQuote()
         .then(quote => {
-            console.log({quote});
-            quoteHolder.innerHTML = quote.h;
+            quoteHolder.classList.remove('show');
+
+            setTimeout(() => {
+                quoteHolder.innerHTML = quote.h;
+                quoteHolder.classList.add('show');
+
+                if (!quoteHolder.classList.contains('adjust-height')) {
+                    quoteHolder.classList.add('adjust-height');
+                }
+
+                isAnimating = false;
+            }, 750)
         })
 })
 
