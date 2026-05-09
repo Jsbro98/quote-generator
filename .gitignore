@@ -39,9 +39,12 @@ build/
 ### VS Code ###
 .vscode/
 
-# Frontend
+### Frontend ###
 frontend/node_modules
 frontend/dist
 frontend/.env.local
 frontend/.env.development
 frontend/.env.production
+
+### Build ###
+src/main/resources/static
