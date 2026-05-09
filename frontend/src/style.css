@@ -10,10 +10,9 @@ body {
 
 
     background: linear-gradient(#5b5b5b, #000000);
-    border-radius: 10px;
-    border: black solid 1px;
     padding: 0 2em 2em 2em;
-    margin: 1em 6em;
+    min-height: 100vh;
+    margin: 0 6em;
 }
 
 #app {
@@ -29,6 +28,7 @@ body {
     opacity: 0;
     max-height: 0;
     overflow: hidden;
+    font-size: 1.5em;
 
     transition: opacity 0.75s ease-in-out,
     max-height 0.75s ease-in-out;
@@ -57,7 +57,36 @@ body {
     justify-self: start;
 }
 
+/* --- Button Styling ---  */
+
 .request-quote-button {
     margin-top: 1em;
+    padding: 0.5em 1.2em;
     font-style: italic;
+    font-family: "Times New Roman", serif;
+    font-size: 1.25em;
+    background: #5b5b5b;
+    border: 2px solid #8a8a8a;
+    border-radius: 2em;
+    letter-spacing: 5%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.request-quote-button:hover {
+    background: #6e6e6e;
+    border-color: #b0b0b0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.request-quote-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    transition-duration: 0.05s;
+}
+
+.request-quote-button:focus-visible {
+    outline: 2px solid #b0b0b0;
+    outline-offset: 2px;
 }
