@@ -47,4 +47,4 @@ frontend/.env.development
 frontend/.env.production
 
 ### Build ###
-src/main/resources/static
+# src/main/resources/static
