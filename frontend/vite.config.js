@@ -19,7 +19,6 @@ export default defineConfig({
             },
             mangle: {
                 toplevel: true,
-                properties: true,
             },
             format: {
                 comments: false,
