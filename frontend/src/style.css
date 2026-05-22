@@ -12,6 +12,7 @@ body {
     background: linear-gradient(#5b5b5b, #000000);
     padding: 0 2em 2em 2em;
     min-height: 100vh;
+    color: white;
 }
 
 #app {
@@ -70,6 +71,7 @@ body {
     letter-spacing: 5%;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    color: white;
 }
 
 .request-quote-button:hover {
