@@ -7,31 +7,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @RestControllerAdvice
 public class GlobalErrorHandler {
 
-  // TODO: create private helpers for DRY
-
   @ExceptionHandler(ZenQuoteBatchFailure.class)
   public ResponseEntity<ApiErrorResponse> handleBatchFailure(ZenQuoteBatchFailure ex) {
-    HttpStatus status = HttpStatus.BAD_GATEWAY;
-    ApiErrorResponse error = new ApiErrorResponse(status.value(), ex.getMessage(), System.currentTimeMillis());
-    return new ResponseEntity<>(error, status);
+    return buildResponse(HttpStatus.BAD_GATEWAY, ex.getMessage());
   }
 
   @ExceptionHandler(ZenQuoteAPIFailure.class)
   public ResponseEntity<ApiErrorResponse> handleAPIFailure(ZenQuoteAPIFailure ex) {
-    HttpStatus status = HttpStatus.BAD_GATEWAY;
-    ApiErrorResponse error = new ApiErrorResponse(status.value(), ex.getMessage(), System.currentTimeMillis());
-    return new ResponseEntity<>(error, status);
+    return buildResponse(HttpStatus.BAD_GATEWAY, ex.getMessage());
   }
 
-  // A fallback for any unexpected errors that don't get specifically caught
+  @ExceptionHandler(NoResourceFoundException.class)
+  public ResponseEntity<ApiErrorResponse> handleNotFound(NoResourceFoundException ex) {
+    return buildResponse(HttpStatus.NOT_FOUND, ex.getMessage());
+  }
+
+  // generic catch all for all through
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiErrorResponse> handleGenericException(Exception ex) {
-    HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-    ApiErrorResponse error = new ApiErrorResponse(status.value(), ex.getMessage(), System.currentTimeMillis());
+    return buildResponse(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
+  }
+
+  // helper method to keep things DRY
+  private ResponseEntity<ApiErrorResponse> buildResponse(HttpStatus status, String message) {
+    ApiErrorResponse error = new ApiErrorResponse(status.value(), message, System.currentTimeMillis());
     return new ResponseEntity<>(error, status);
   }
 }
