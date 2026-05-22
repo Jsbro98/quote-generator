@@ -12,7 +12,6 @@ body {
     background: linear-gradient(#5b5b5b, #000000);
     padding: 0 2em 2em 2em;
     min-height: 100vh;
-    margin: 0 6em;
 }
 
 #app {
